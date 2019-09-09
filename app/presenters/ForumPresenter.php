@@ -34,14 +34,11 @@ class ForumPresenter extends ForumSecuredPresenter
 		$this->template->switchHeader = $this->switchHeader;
 	}
 
-	/**
-	 * Sign-in form factory.
-	 * @return Form
-	 */
+	
 	protected function createComponentNewPostForm()
 	{
 		return $this->newPostFactory->create(function () {
-				$this->restoreRequest($this->backlink);
+				$this->redirect('Forum:');
 			});
 	}
 

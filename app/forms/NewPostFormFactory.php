@@ -5,6 +5,7 @@ namespace App\Forms;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Security\User;
+use App\Model\PostsModel;
 
 class NewPostFormFactory
 {
@@ -17,9 +18,13 @@ class NewPostFormFactory
 	/** @var User */
 	private $user;
 
+	/** @var PostsModel @inject */
+	public $postsModel;
 
-	public function __construct(FormFactory $factory, User $user)
+
+	public function __construct(FormFactory $factory, User $user, PostsModel $postsModel)
 	{
+		$this->postsModel = $postsModel;
 		$this->factory = $factory;
 		$this->user = $user;
 	}
@@ -39,7 +44,8 @@ class NewPostFormFactory
 		$form->addSubmit('send', 'Post');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
-			
+			$values['uid'] = $this->user->id;
+			$this->postsModel->add($values);
 			$onSuccess();
 		};
 
