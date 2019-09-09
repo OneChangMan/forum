@@ -36,12 +36,15 @@ class NewPostFormFactory
 	{
 		$form = $this->factory->create();
 		$form->addText('title', 'Title')
+			->setHtmlAttribute('style="width: 100%;"')
 			->setRequired('Please enter the title of your post.');
 
 		$form->addTextArea('content', 'Content')
+			->setHtmlAttribute('rows="4" cols="50" class="my-2"')
 			->setRequired("Posts can't be empty!");
 
-		$form->addSubmit('send', 'Post');
+		$form->addSubmit('send', 'Post')
+			->setHtmlAttribute('class="custom-submit-btn"');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			$values['uid'] = $this->user->id;

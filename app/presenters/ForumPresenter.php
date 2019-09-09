@@ -17,7 +17,6 @@ class ForumPresenter extends ForumSecuredPresenter
 
 
 	public function __construct(Forms\NewPostFormFactory $newPostFactory)
-
 	{
 		$this->newPostFactory = $newPostFactory;
 	}
@@ -25,16 +24,17 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionDefault()
 	{
-		$this->template->switchHeader = $this->switchHeader = true;
+		$this->template->switchHeader = true;
+		$this->template->posts = $this->getPosts(0, 5);
 	}
 
 
 	public function actionNewPost()
 	{
-		$this->template->switchHeader = $this->switchHeader;
+		$this->template->switchHeader = true;
 	}
 
-	
+
 	protected function createComponentNewPostForm()
 	{
 		return $this->newPostFactory->create(function () {
@@ -43,9 +43,15 @@ class ForumPresenter extends ForumSecuredPresenter
 	}
 
 
-	public function actionViewPost()
+	public function actionViewPost(): void
 	{
-		$this->template->switchHeader = $this->switchHeader;
+		$this->template->switchHeader = true;
+	}
+
+	private function getPosts(int $pageStart, int $pageStop): array
+	{
+		$posts = $this->postsModel->findBy(['id >=' => $pageStart, 'id <' => $pageStop])->fetchAll();
+		return $posts;
 	}
 
 }
