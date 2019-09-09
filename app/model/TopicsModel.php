@@ -24,13 +24,20 @@ class TopicsModel extends Model
 	}
 
 
-	public function getActiveTopics(): array
+	public function getActiveTopics(): ?array
 	{
 		$activeTopics = $this->findBy(['deactivated IS NULL']);
+
 		if ($activeTopics->count() > 0) {
-		
+			$activeTopicsArray = [];
+
+			foreach($activeTopics as $topic){
+				$activeTopicsArray[$topic->id] = $topic->topic;
+			}
+			
+			return $activeTopicsArray;
 		}
-		return;
+		return NULL;
 	}
 
 }

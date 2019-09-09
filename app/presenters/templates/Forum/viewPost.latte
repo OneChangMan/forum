@@ -1,2 +1,31 @@
+{block title}{$topic}{/block}
 
 {block content}
+
+<div class="container" style="height:100%;">
+
+
+
+	{if $postCount > 0}
+
+		<div class="row mt-5">
+		<div class="col-12 text-center">
+			<h2>Choose your topic.</h2>
+		</div>
+	</div>
+		{foreach $posts as $post}
+			<div class="row my-3">
+				<div class="col-12 glow">
+					<a class="no-text-decoration" n:href="Forum:viewComments $post->id">
+						<h4>{$post->title}</h4>
+						<p>{$post->content}</p>
+					</a>
+				</div>
+			</div>
+			<hr>
+		{/foreach}
+	{else}
+		{include includes/noPosts.latte}
+	{/if}
+</div>
+{/block}

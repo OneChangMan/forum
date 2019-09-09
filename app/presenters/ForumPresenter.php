@@ -44,7 +44,7 @@ class ForumPresenter extends ForumSecuredPresenter
 	}
 
 
-	public function actionNewPost()
+	public function actionNewPost(): void
 	{
 
 	}
@@ -60,29 +60,27 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionViewPost(int $id): void
 	{
-		bdump($id);
+		$topic = $this->topicsModel->findById($id);
+		$this->template->topic = $topic->topic;
+
+		$posts = $this->postsModel->getPosts($id, 0, 10);
+
+		$this->template->postCount = count($posts);
+		$this->template->posts = $posts;
 	}
 
 
-	private function getTopics(int $pageStart, int $pageStop): array
-	{
-		$posts = $this->postsModel->findBy(['id >=' => $pageStart, 'id <' => $pageStop])->fetchAll();
-		return $posts;
-	}
-
-
-	private function getPosts(int $pageStart, int $pageStop): array
-	{
-		$posts = $this->postsModel->findBy(['id >=' => $pageStart, 'id <' => $pageStop])->fetchAll();
-		return $posts;
-	}
-
-
-	public function actionLogOut()
+	public function actionLogOut(): void
 	{
 		$this->user->logout();
 		$this->flashMessage("You've been successfully logged out! Have a great day.");
 		$this->redirect('Homepage:');
+	}
+
+
+	public function actionViewComments(int $postId): void
+	{
+
 	}
 
 }

@@ -6,9 +6,9 @@ class PostsModel extends Model
 {
 
 
-	public function getPosts(int $pageStart, int $pageStop): array
+	public function getPosts(int $topicId, int $pageStart, int $rowsPerPage): array
 	{
-		$posts = $this->connection->findBy(['id >=' => $pageStart, 'id <' => $pageStop])->fetchAll();
+		$posts = $this->findBy(['topicId' => $topicId, 'id >' => $pageStart])->limit($rowsPerPage)->fetchAll();
 		return $posts;
 	}
 

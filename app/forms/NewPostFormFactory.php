@@ -48,7 +48,9 @@ class NewPostFormFactory
 			->setHtmlAttribute('rows="4" cols="50" class="my-2"')
 			->setRequired("Posts can't be empty!");
 
-		$form->addSelect('topicId', 'Choose your topic', $this->getTopics());
+		$form->addSelect('topicId', 'Your topic', $this->getTopics())
+			->setHtmlAttribute('style="width: 100%;"')
+			->setRequired("No topic, no post!");
 
 		$form->addSubmit('send', 'Post')
 			->setHtmlAttribute('class="custom-submit-btn"');
