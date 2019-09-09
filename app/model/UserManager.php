@@ -19,7 +19,8 @@ final class UserManager implements Nette\Security\IAuthenticator
 		COLUMN_NAME = 'username',
 		COLUMN_PASSWORD_HASH = 'password',
 		COLUMN_EMAIL = 'email',
-		COLUMN_ROLE = 'role';
+		COLUMN_ROLE = 'role',
+		COLUMN_ACTIVE = 'active';
 
 
 	/** @var Nette\Database\Context */
@@ -71,7 +72,7 @@ final class UserManager implements Nette\Security\IAuthenticator
 	 * @return void
 	 * @throws DuplicateNameException
 	 */
-	public function add($username, $email, $password)
+	public function add($username, $email, $password, $role, $date)
 	{
 		Nette\Utils\Validators::assert($email, 'email');
 		try {
@@ -79,6 +80,8 @@ final class UserManager implements Nette\Security\IAuthenticator
 				self::COLUMN_NAME => $username,
 				self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
 				self::COLUMN_EMAIL => $email,
+				self::COLUMN_ROLE => $role,
+				self::COLUMN_ACTIVE => $date,
 			]);
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new DuplicateNameException;

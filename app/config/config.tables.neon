@@ -1,0 +1,2 @@
+services:
+	postsModel: Model\PostsModel

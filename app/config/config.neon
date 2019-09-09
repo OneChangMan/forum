@@ -25,7 +25,9 @@ database:
 
 services:
 	- App\Model\UserManager
+	- App\Model\PostsModel
 	- App\Forms\FormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
+	- App\Forms\NewPostFormFactory
 	router: App\RouterFactory::createRouter

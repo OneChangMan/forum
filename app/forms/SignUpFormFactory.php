@@ -5,6 +5,7 @@ namespace App\Forms;
 use App\Model;
 use Nette;
 use Nette\Application\UI\Form;
+use Nette\Utils\DateTime;
 
 
 final class SignUpFormFactory
@@ -48,7 +49,7 @@ final class SignUpFormFactory
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {
-				$this->userManager->add($values->username, $values->email, $values->password);
+				$this->userManager->add($values->username, $values->email, $values->password, 2, (new DateTime)->format('Y-m-d h:i:s'));
 			} catch (Model\DuplicateNameException $e) {
 				$form['username']->addError('Username is already taken.');
 				return;

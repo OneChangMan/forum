@@ -39,6 +39,10 @@
   float: right;
 }
 
+.header-btn {
+	margin-right: 5px;
+}
+
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
