@@ -69,3 +69,18 @@
 	border-radius: 4px;
 	text-decoration: none !important;
 }
+
+.custom-green-text{
+	font-weight: bold;
+	font-size: 1.2em;
+	color: #74c078;
+}
+
+.no-text-decoration{
+	text-decoration: none !important;
+	color: black;
+}
+
+.no-text-decoration:hover{
+	color: #74c078;
+}

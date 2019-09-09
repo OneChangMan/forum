@@ -26,6 +26,7 @@ class ForumPresenter extends ForumSecuredPresenter
 	{
 		$this->template->switchHeader = true;
 		$this->template->posts = $this->getPosts(0, 5);
+		$this->template->postCount = count($this->template->posts);
 	}
 
 
