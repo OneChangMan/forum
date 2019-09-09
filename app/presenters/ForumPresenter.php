@@ -12,13 +12,13 @@ class ForumPresenter extends ForumSecuredPresenter
 	/** @var Forms\NewPostFormFactory */
 	private $newPostFactory;
 
-	/** @var postsModel @inject */
+	/** @var PostsModel @inject */
 	public $postsModel;
 
 
-	public function __construct(Forms\NewPostFormFactory $newPostFactory, PostsModel $postsModel)
+	public function __construct(Forms\NewPostFormFactory $newPostFactory)
+
 	{
-		$this->postsModel = $postsModel;
 		$this->newPostFactory = $newPostFactory;
 	}
 
@@ -33,7 +33,6 @@ class ForumPresenter extends ForumSecuredPresenter
 	{
 		$this->template->switchHeader = $this->switchHeader;
 	}
-
 
 	/**
 	 * Sign-in form factory.
