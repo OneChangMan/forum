@@ -1,19 +1,53 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Presenters;
 
-/**
- * Description of AdminPresenter
- *
- * @author kuroi
- */
-class AdminPresenter
+class AdminPresenter extends ForumSecuredPresenter
 {
-	//put your code here
+
+
+
+
+	public function actionDefault()
+	{
+		$this->isAdmin();
+	}
+
+
+	public function actionAddTopic()
+	{
+		$this->isAdmin();
+	}
+
+
+	/**
+	 * Sign-in form factory.
+	 * @return Form
+	 */
+	protected function createComponentNewTopicForm()
+	{
+		return $this->newTopicFormFactory->create(function () {
+				$this->redirect('Admin:');
+			});
+	}
+
+
+	public function banUser()
+	{
+		$this->isAdmin();
+	}
+
+
+	private function isAdmin(): void
+	{
+		foreach ($this->user->roles as $role) {
+			if ($role === 1) {
+				return;
+			}
+		}
+		$this->user->logout();
+		$this->flashMessage('Please, log in to view our forum.');
+		$this->redirect('Homepage:');
+	}
+
 }

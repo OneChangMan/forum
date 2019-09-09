@@ -10,13 +10,4 @@ use Nette;
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
 
-	/** @var boolean */
-	public $switchHeader;
-
-
-	public function actionDefault()
-	{
-		$this->switchHeader = false;
-	}
-
 }

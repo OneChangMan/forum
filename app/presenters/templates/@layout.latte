@@ -20,17 +20,20 @@
 		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
 		<div class="header">
-			<a href="#" class="logo">Forum</a>
-			<div class="header-right">
-				{if $switchHeader == true}
+			{if $user->isLoggedIn()}
+				<a n:href=":Forum:"  class="logo">Forum</a>
+				<div class="header-right">
+					{if in_array(1, $user->roles)}
+						<a class="header-btn" n:href=":Admin:">Admin</a>
+					{/if}
 					<a class="header-btn" n:href=":Forum:logout">Log Out</a>
 					<a id="forum" class="header-btn" n:href=":Forum:default" >Dashboard</a>
 					<a id="profile" class="header-btn" href="#profile">My Profile</a>
 					<a id="newpost" class="header-btn" n:href=":Forum:newPost">New Post</a>
-				{else}
-
-				{/if}
-			</div>
+				</div>
+			{else}
+				<a   n:href=":Homepage:"  class="logo">Forum</a>
+			{/if}
 		</div>
 		<main class="container">
 			{include content}

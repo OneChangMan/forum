@@ -3,13 +3,28 @@
 {block content}
 
 <div class="container" style="height:100%; background:white;">
+	<div class="row">
+		<div class="col-12" style="background: black; color: red; font-weight: bold;">
+			<marquee behavior="scroll" direction="left" scrollamount="4">Welcome to our humble forum. Please be kind to everyone and act the same way you would like others to act towards you.</marquee>
+		</div>
+	</div>
+	<div class="row mt-5">
+		<div class="col-12 text-center">
+			<h2>Choose your topic.</h2>
+		</div>
+	</div>
+
 	{if $topicCount > 0}
 		{foreach $topics as $topic}
-			<div class="row" >
-				<div class="col-12">
-					{$topic->topic}<br>
+			<div class="row my-3">
+				<div class="col-12 glow">
+					<a class="no-text-decoration" n:href="Forum:viewPost $topic->id">
+						<h4>{$topic->topic}</h4>
+						<p>{$topic->description}</p>
+					</a>
 				</div>
 			</div>
+			<hr>
 		{/foreach}
 	{else}
 		{include includes/error.latte}

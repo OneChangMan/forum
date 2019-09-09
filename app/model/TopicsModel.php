@@ -15,9 +15,22 @@ namespace App\Model;
  */
 class TopicsModel extends Model
 {
-	public function getTopics()
+
+
+	public function getTopics(): \Nette\Database\Table\Selection
 	{
 		$posts = $this->findAll();
 		return $posts;
 	}
+
+
+	public function getActiveTopics(): array
+	{
+		$activeTopics = $this->findBy(['deactivated IS NULL']);
+		if ($activeTopics->count() > 0) {
+		
+		}
+		return;
+	}
+
 }

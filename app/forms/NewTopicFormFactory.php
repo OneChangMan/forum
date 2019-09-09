@@ -5,10 +5,9 @@ namespace App\Forms;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Security\User;
-use App\Model\PostsModel;
 use App\Model\TopicsModel;
 
-class NewPostFormFactory
+class NewTopicFormFactory
 {
 
 	use Nette\SmartObject;
@@ -19,17 +18,13 @@ class NewPostFormFactory
 	/** @var User */
 	private $user;
 
-	/** @var PostsModel @inject */
-	public $postsModel;
-
 	/** @var TopicsModel @inject */
 	public $topicsModel;
 
 
-	public function __construct(FormFactory $factory, User $user, PostsModel $postsModel, TopicsModel $topicsModel)
+	public function __construct(FormFactory $factory, User $user, TopicsModel $topicsModel)
 	{
 		$this->topicsModel = $topicsModel;
-		$this->postsModel = $postsModel;
 		$this->factory = $factory;
 		$this->user = $user;
 	}
@@ -48,8 +43,6 @@ class NewPostFormFactory
 			->setHtmlAttribute('rows="4" cols="50" class="my-2"')
 			->setRequired("Posts can't be empty!");
 
-		$form->addSelect('topicId', 'Choose your topic', $this->getTopics());
-
 		$form->addSubmit('send', 'Post')
 			->setHtmlAttribute('class="custom-submit-btn"');
 
@@ -60,10 +53,6 @@ class NewPostFormFactory
 		};
 
 		return $form;
-	}
-
-	private function getTopics(){
-		return $this->topicsModel->getActiveTopics();
 	}
 
 }

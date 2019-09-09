@@ -84,3 +84,17 @@
 .no-text-decoration:hover{
 	color: #74c078;
 }
+
+.glow {
+	padding: 5px;
+	background: white;
+	-webkit-transition: color 5s;
+    -moz-transition:    color 5s;
+    -ms-transition:     color 5s;
+    -o-transition:      color 5s;
+    transition:         color 5s;
+}
+.glow:hover{
+	background: #e1f5da;
+
+}

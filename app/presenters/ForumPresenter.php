@@ -27,17 +27,16 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionDefault(): void
 	{
-		$this->template->switchHeader = true;
 		$this->template->topics = $this->topicsModel->getTopics();
 		$this->template->topicCount = $this->template->topics->count();
 		$this->template->isAdmin = $this->isAdmin();
 	}
 
 
-	private function isAdmin(): bool
+	protected function isAdmin(): bool
 	{
 		foreach ($this->user->roles as $role) {
-			if ($role === 2) {
+			if ($role === 1) {
 				return true;
 			}
 		}
@@ -47,7 +46,7 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionNewPost()
 	{
-		$this->template->switchHeader = true;
+
 	}
 
 
@@ -59,9 +58,9 @@ class ForumPresenter extends ForumSecuredPresenter
 	}
 
 
-	public function actionViewPost(): void
+	public function actionViewPost(int $id): void
 	{
-		$this->template->switchHeader = true;
+		bdump($id);
 	}
 
 

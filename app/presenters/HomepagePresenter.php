@@ -27,13 +27,14 @@ final class HomepagePresenter extends BasePresenter
 
 	public function actionDefault()
 	{
-		$this->template->switchHeader = $this->switchHeader;
+		$this->loggedCheck();
 	}
 
-	public function actionRegistration(){
-		$this->template->switchHeader = $this->switchHeader;
-	}
 
+	public function actionRegistration()
+	{
+		$this->loggedCheck();
+	}
 
 
 	/**
@@ -64,6 +65,14 @@ final class HomepagePresenter extends BasePresenter
 	public function actionOut()
 	{
 		$this->getUser()->logout();
+	}
+
+
+	private function loggedCheck()
+	{
+		if ($this->user->isLoggedIn()) {
+			$this->redirect(':Forum:');
+		}
 	}
 
 }
