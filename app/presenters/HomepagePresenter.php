@@ -27,9 +27,12 @@ final class HomepagePresenter extends BasePresenter
 
 	public function actionDefault()
 	{
-		$this->template->formSwitch = true;
+		$this->template->switchHeader = $this->switchHeader;
 	}
 
+	public function actionRegistration(){
+		$this->template->switchHeader = $this->switchHeader;
+	}
 
 
 
@@ -41,7 +44,7 @@ final class HomepagePresenter extends BasePresenter
 	{
 		return $this->signInFactory->create(function () {
 				$this->restoreRequest($this->backlink);
-				$this->redirect('Homepage:');
+				$this->redirect('Forum:');
 			});
 	}
 

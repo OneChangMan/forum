@@ -1,3 +1,56 @@
-.bg-legito {
+.legito-green {
 	background: #74c078;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #74c078;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+  text-decoration: none !important;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: #F5F3EE;
+  color: black;
+}
+
+.header a.active {
+  background-color: white;
+  color: black;
+}
+
+.header-right {
+  float: right;
+}
+
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .header-right {
+    float: none;
+  }
+}
+
+.green-border{
+	border: solid #74c078;
 }
