@@ -1,19 +1,24 @@
 {block title}Registration{/block}
 
 {block content}
-
 <div class="container">
 	<div class="row mt-5 pt-5">
 		<div class="col-2"></div>
 		<div class="col-8 green-border">
 			<div class="col-12 m-3">
-				{control signUpForm}
+				<div class="row">
+					<div class="col-2"></div>
+					<div class="col-8">
+						{control signUpForm}
+					</div>
+					<div class="col-2"></div>
+				</div>
 			</div>
-			<div class="col-12 m-1">
+			<div class="col-12 m-1 text-right">
 				<a n:href="default">Already have an account? Log in.</a>
 			</div>
 		</div>
 	</div>
+</div>
+{/block}
 
-</div>
-</div>

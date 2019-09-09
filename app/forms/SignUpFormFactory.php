@@ -35,17 +35,21 @@ final class SignUpFormFactory
 	{
 		$form = $this->factory->create();
 		$form->addText('username', 'Pick a username:')
+			->setHtmlAttribute('class="ml-1"')
 			->setRequired('Please pick a username.');
 
 		$form->addEmail('email', 'Your e-mail:')
+			->setHtmlAttribute('class="ml-1"')
 			->setRequired('Please enter your e-mail.');
 
 		$form->addPassword('password', 'Create a password:')
-			->setOption('description', sprintf('at least %d characters', self::PASSWORD_MIN_LENGTH))
+			->setHtmlAttribute('class="ml-1"')
+			->setHtmlAttribute('placeholder', 'Minimum 7 characters')
 			->setRequired('Please create a password.')
 			->addRule($form::MIN_LENGTH, null, self::PASSWORD_MIN_LENGTH);
 
-		$form->addSubmit('send', 'Sign up');
+		$form->addSubmit('send', 'Sign up')
+			->setHtmlAttribute('class="ml-1"');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {

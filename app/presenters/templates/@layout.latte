@@ -23,9 +23,10 @@
 			<a href="#" class="logo">Forum</a>
 			<div class="header-right">
 				{if $switchHeader == true}
-					<a class="active header-btn" n:href=":Forum:default" >Dashboard</a>
-					<a class="header-btn" href="#profile">My Profile</a>
-					<a class="header-btn" n:href=":Forum:newPost">New Post</a>
+					<a class="header-btn" n:href=":Forum:logout">Log Out</a>
+					<a id="forum" class="header-btn" n:href=":Forum:default" >Dashboard</a>
+					<a id="profile" class="header-btn" href="#profile">My Profile</a>
+					<a id="newpost" class="header-btn" n:href=":Forum:newPost">New Post</a>
 				{else}
 
 				{/if}

@@ -32,14 +32,18 @@ final class SignInFormFactory
 	{
 		$form = $this->factory->create();
 		$form->addText('username', 'Username:')
+			->setHtmlAttribute('class="ml-1"')
 			->setRequired('Please enter your username.');
 
 		$form->addPassword('password', 'Password:')
+			->setHtmlAttribute('class="ml-1"')
 			->setRequired('Please enter your password.');
 
-		$form->addCheckbox('remember', 'Keep me signed in');
+		$form->addCheckbox('remember', 'Keep me signed in')
+			->setHtmlAttribute('class="ml-1"');
 
-		$form->addSubmit('send', 'Sign in');
+		$form->addSubmit('send', 'Sign in')
+			->setHtmlAttribute('class="ml-1"');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {
