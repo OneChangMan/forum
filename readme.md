@@ -1,4 +1,4 @@
-Nette Sandbox
+Quick Forum
 =============
 
 
