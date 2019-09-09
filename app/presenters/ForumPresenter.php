@@ -80,7 +80,7 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionViewComments(int $postId): void
 	{
-
+		$this->template->post = $this->postsModel->findById($postId);
 	}
 
 }
