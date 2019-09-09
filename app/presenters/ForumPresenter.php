@@ -15,6 +15,9 @@ class ForumPresenter extends ForumSecuredPresenter
 	/** @var PostsModel @inject */
 	public $postsModel;
 
+	/** @var \App\Model\TopicsModel @inject */
+	public $topicsModel;
+
 
 	public function __construct(Forms\NewPostFormFactory $newPostFactory)
 	{
@@ -25,8 +28,9 @@ class ForumPresenter extends ForumSecuredPresenter
 	public function actionDefault()
 	{
 		$this->template->switchHeader = true;
-		$this->template->posts = $this->getPosts(0, 5);
-		$this->template->postCount = count($this->template->posts);
+		$this->template->topics = $this->topicsModel->getTopics();
+		$this->template->topicCount = $this->template->topics->count();
+
 	}
 
 
@@ -47,6 +51,12 @@ class ForumPresenter extends ForumSecuredPresenter
 	public function actionViewPost(): void
 	{
 		$this->template->switchHeader = true;
+	}
+
+	private function getTopics(int $pageStart, int $pageStop): array
+	{
+		$posts = $this->postsModel->findBy(['id >=' => $pageStart, 'id <' => $pageStop])->fetchAll();
+		return $posts;
 	}
 
 	private function getPosts(int $pageStart, int $pageStop): array

@@ -2,8 +2,14 @@
 
 namespace App\Model;
 
-
 class PostsModel extends Model
 {
-	//put your code here
+
+
+	public function getPosts(int $pageStart, int $pageStop): array
+	{
+		$posts = $this->connection->findBy(['id >=' => $pageStart, 'id <' => $pageStop])->fetchAll();
+		return $posts;
+	}
+
 }

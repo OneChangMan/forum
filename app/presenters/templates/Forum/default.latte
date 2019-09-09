@@ -2,27 +2,17 @@
 
 {block content}
 
-<div class="container">
-	{if $postCount > 0}
-		{foreach $posts as $post}
-			<div class="row">
+<div class="container" style="height:100%; background:white;">
+	{if $topicCount > 0}
+		{foreach $topics as $topic}
+			<div class="row" >
 				<div class="col-12">
-					{$post->content}<br>
-					---------------
+					{$topic->topic}<br>
 				</div>
 			</div>
 		{/foreach}
 	{else}
-		<div class="row text-center">
-			<div class="col-12 my-5">
-				<img src="../images/forum/error/tinyfied/uhoh.jpg" alt="Well, it happens to the best of us...">
-			</div>
-			<div class="col-12">
-				<p>Ooooh, unfortunately, there are no posts yet :(...</p>
-				<p>Be the <span class="custom-green-text">first, brave one</span> to <a class="no-text-decoration" n:href=":newPost">make <span class="custom-green-text">one</span></a>!</p>
-				<p><span style="font-size:2.8em;">.</span><span style="font-size:3.2em;">.</span><span style="font-size:2.8em;">.</span> <span style="font-size:1.8em;">or</span> <a class="no-text-decoration" n:href=":newPost"><span class="custom-green-text" style="font-size: 2em;">TWO!</span></a> Heh.</p>
-			</div>
-		</div>
+		{include includes/error.latte}
 	{/if}
 </div>
 {/block}
