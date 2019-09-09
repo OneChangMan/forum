@@ -1,3 +1,27 @@
+{block afterJs}
+{/block}
+{block title}Forum{/block}
+
 {block content}
 
+<div class="container">
+	<div class="row center" >
+		<div class="col-12">
+			{snippet formSwitch}
+				{if $formSwitch == true}
+					{control signInForm}
+				{else}
+					{control signUpForm}
+				{/if}
+			{/snippet}
+			{* OR
+			{import '../components/form.latte'}
+			{include form signInForm}
+			*}
+		</div>
+		<div class="col-12">
+			<a id="target">Don't have an account yet? Sign up.</a>
+		</div>
+	</div>
+</div>
 {/block}
