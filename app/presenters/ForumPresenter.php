@@ -8,6 +8,9 @@ use Nette\Application\UI\Form;
 class ForumPresenter extends ForumSecuredPresenter
 {
 
+	/** @var Forms\AddCommentFormFactory */
+	private $addCommentFactory;
+
 	/** @var Forms\NewPostFormFactory */
 	private $newPostFactory;
 
@@ -23,10 +26,14 @@ class ForumPresenter extends ForumSecuredPresenter
 	/** @var \App\Model\UsersModel @inject */
 	public $usersModel;
 
+	/** @var integer */
+	private $postId;
 
-	public function __construct(Forms\NewPostFormFactory $newPostFactory)
+
+	public function __construct(Forms\NewPostFormFactory $newPostFactory, Forms\AddCommentFormFactory $addCommentFactory)
 	{
 		$this->newPostFactory = $newPostFactory;
+		$this->addCommentFactory = $addCommentFactory;
 	}
 
 
@@ -85,6 +92,7 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionViewComments(int $postId): void
 	{
+		$this->postId = $postId;
 		$post = $this->postsModel->findById($postId);
 		$this->template->post = $post;
 		$this->template->postAuthor = $this->usersModel->getUser($post->uid);
@@ -98,6 +106,15 @@ class ForumPresenter extends ForumSecuredPresenter
 			}
 		}
 		$this->template->comments = $commentsArray;
+	}
+
+	protected function createComponentAddCommentForm(): form
+	{
+		return $this->addCommentFactory
+			->setPostId($this->postId)
+			->create(function () {
+				$this->redirect('this');
+			});
 	}
 
 }

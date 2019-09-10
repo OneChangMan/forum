@@ -30,6 +30,7 @@ services:
 	- App\Model\TopicsModel
 	- App\Model\UsersModel
 	- App\Forms\FormFactory
+	- App\Forms\AddCommentFormFactory
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
 	- App\Forms\NewPostFormFactory
