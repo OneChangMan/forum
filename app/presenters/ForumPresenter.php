@@ -4,7 +4,6 @@ namespace App\Presenters;
 
 use App\Forms;
 use Nette\Application\UI\Form;
-use App\Model\PostsModel;
 
 class ForumPresenter extends ForumSecuredPresenter
 {
@@ -12,11 +11,17 @@ class ForumPresenter extends ForumSecuredPresenter
 	/** @var Forms\NewPostFormFactory */
 	private $newPostFactory;
 
-	/** @var PostsModel @inject */
+	/** @var \App\Model\PostsModel @inject */
 	public $postsModel;
 
 	/** @var \App\Model\TopicsModel @inject */
 	public $topicsModel;
+
+	/** @var \App\Model\CommentsModel @inject */
+	public $commentsModel;
+
+	/** @var \App\Model\UsersModel @inject */
+	public $usersModel;
 
 
 	public function __construct(Forms\NewPostFormFactory $newPostFactory)
@@ -80,7 +85,19 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	public function actionViewComments(int $postId): void
 	{
-		$this->template->post = $this->postsModel->findById($postId);
+		$post = $this->postsModel->findById($postId);
+		$this->template->post = $post;
+		$this->template->postAuthor = $this->usersModel->getUser($post->uid);
+
+		$commentsArray = [];
+		$comments = $this->commentsModel->getComments($postId, 0, 10);
+		foreach ($comments as $comment) {
+			$user = $this->usersModel->getUser($comment->userId);
+			if ($user) {
+				$commentsArray[$user->username] = $comment;
+			}
+		}
+		$this->template->comments = $commentsArray;
 	}
 
 }
