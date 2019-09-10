@@ -15,10 +15,10 @@
 </div>
 <br>
 <div class="container" style="height:100%; background: white;">
-	{foreach $comments as $comment}
+	{foreach $comments as $username => $comment}
 		<div class="row align-items-center" style="min-height:85px;">
 			<div class="col-3 text-center">
-				{$comment->pid}
+				{$username}
 			</div>
 			<div class="col-1" style="min-height: 85px; border-left: 6px solid #74c078;">
 			</div>
