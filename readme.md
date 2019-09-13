@@ -2,7 +2,7 @@ Quick Forum
 =============
 A very, very simple forum made in haste.
 There are two types of users, admins and normal users.
-Users can add posts and comments to each posts.
+Users can add posts and comments to each post.
 
 **If you have any ideas on how to make this simple project better please let me know!**
 
@@ -25,7 +25,7 @@ As mentioned before, I'm inexperienced so ~~feel free to~~ **please correct me o
 
 5) Add the new project to your hosts file. The path to the file, on Windows, is: *C:\Windows\System32\drivers\etc\hosts*  
    There add this line at the end of the file. `127.0.0.1       localhost.forum`
-6) Let's add the database now. The .sql file's path is *www/db-backup/test.sql* .  
+6) Let's add the database now. The .sql file's path is *db-backup/test.sql* .  
 7) The project should be fine to run now. 
 
 
