@@ -47,8 +47,9 @@ class ForumPresenter extends ForumSecuredPresenter
 
 	protected function isAdmin(): bool
 	{
+		$adminRoleId = 1;
 		foreach ($this->user->roles as $role) {
-			if ($role === 1) {
+			if ($role === $adminRoleId) {
 				return true;
 			}
 		}
@@ -70,15 +71,17 @@ class ForumPresenter extends ForumSecuredPresenter
 	}
 
 
-	public function actionViewPost(int $id): void
+	public function actionViewPost(int $topicId): void
 	{
-		$topic = $this->topicsModel->findById($id);
-		$this->template->topic = $topic->topic;
-
-		$posts = $this->postsModel->getPosts($id, 0, 10);
+		$startingRow = 0;
+		$rowsToShow = 10;
+		$posts = $this->postsModel->getPosts($topicId, $startingRow, $rowsToShow);
 
 		$this->template->postCount = count($posts);
 		$this->template->posts = $posts;
+
+		$topic = $this->topicsModel->findById($topicId);
+		$this->template->topic = $topic->topic;
 	}
 
 
@@ -98,7 +101,7 @@ class ForumPresenter extends ForumSecuredPresenter
 		$this->template->postAuthor = $this->usersModel->getUser($post->uid);
 
 		$commentsArray = [];
-		$comments = $this->commentsModel->getComments($postId, 0, 10);
+		$comments = $this->commentsModel->getComments($postId);
 		foreach ($comments as $comment) {
 			$user = $this->usersModel->getUser($comment->userId);
 			if ($user) {
@@ -108,13 +111,14 @@ class ForumPresenter extends ForumSecuredPresenter
 		$this->template->comments = $commentsArray;
 	}
 
+
 	protected function createComponentAddCommentForm(): form
 	{
 		return $this->addCommentFactory
-			->setPostId($this->postId)
-			->create(function () {
-				$this->redirect('this');
-			});
+				->setPostId($this->postId)
+				->create(function () {
+					$this->redirect('this');
+				});
 	}
 
 }
