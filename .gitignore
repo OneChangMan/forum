@@ -1,5 +1,6 @@
 log/*
 temp/*
+node_modules/*
 !.gitignore
 !.htaccess
 !web.config
