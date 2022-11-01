@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "del": "^2.2.2",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.0",
     "gulp-csso": "^2.0.0",
     "gulp-uglify": "^2.1.2",
